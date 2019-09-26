@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Deep Space Survivor</string>
+    <string name="title">Deep Space Survivor</string>
+    <string name="play_game">Play Game</string>
+    <string name="game_screen_name">Game Screen</string>
+    <string name="view_high_scores">View High Scores</string>
+    <string name="spaceship">spaceship</string>
+    <string name="space_background">space_background</string>
+    <string name="copyright">\u00A9 Brandon Litwin 2019</string>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+</resources>
