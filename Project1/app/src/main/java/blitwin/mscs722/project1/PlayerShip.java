@@ -8,36 +8,100 @@ public class PlayerShip {
     private Bitmap bitmap;
 
     // player coordinates
-    private int x;
-    private int y;
+    private int xPos;
+    private int yPos;
+
+    private boolean boosting;
 
     // player ship speed
-    private int speed = 0;
+    private int speed;
 
-    public PlayerShip(Context context) {
-        x = 75;
-        y = 50;
+    private final int MIN_SPEED = 1;
+    private final int MAX_SPEED = 30;
+
+    // max and min X values of screen that player can travel in
+    private int maxX;
+    private int minX;
+
+    // ship will either move left or right
+    private String moveDirection;
+
+    public PlayerShip(Context context, int screenWidth, int screenHeight) {
+        xPos = screenWidth / 2;
+        yPos = screenHeight - (screenHeight / 4);
         speed = 1;
 
         // get bitmap
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.spaceship);
+
+        maxX = screenWidth - bitmap.getWidth();
+        minX = 0;
+
+        boosting = false;
+    }
+
+    //setting boosting true
+    public void setBoosting() {
+        boosting = true;
+    }
+
+    //setting boosting false
+    public void stopBoosting() {
+        boosting = false;
+    }
+    
+    public void moveLeft() {
+        moveDirection = "left";
+    }
+    
+    public void moveRight() {
+        moveDirection = "right";
     }
 
     public void update(){
-        // updating y coordinate
-        y++;
+        if (boosting) {
+            speed += 5;
+        } else {
+            speed -= 2;
+        }
+        // keep ship from going too fast
+        if (speed > MAX_SPEED) {
+            speed = MAX_SPEED;
+        }
+        // keep the ship slowly drifting with no input
+        if (speed < MIN_SPEED) {
+            speed = MIN_SPEED;
+        }
+
+        // moving the ship left
+        if (moveDirection == "left") {
+            xPos -= speed;
+        }
+
+        // moving the ship right
+        if (moveDirection == "right") {
+            xPos += speed;
+        }
+
+        // but controlling it also so that it won't go off the screen
+        if (xPos < minX) {
+            xPos = minX;
+        }
+        if (xPos > maxX) {
+            xPos = maxX;
+        }
     }
 
     public Bitmap getBitmap() {
         return bitmap;
     }
 
-    public int getX() {
-        return x;
+    public int getXPos() {
+        return xPos;
     }
 
-    public int getY() {
-        return y;
+    public int getYPos() {
+        return yPos;
     }
 
     public int getSpeed() {
