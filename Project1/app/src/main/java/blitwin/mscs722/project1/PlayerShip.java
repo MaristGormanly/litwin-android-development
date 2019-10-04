@@ -3,6 +3,7 @@ package blitwin.mscs722.project1;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 
 public class PlayerShip {
     private Bitmap bitmap;
@@ -18,6 +19,8 @@ public class PlayerShip {
 
     private final int MIN_SPEED = 1;
     private final int MAX_SPEED = 30;
+
+    private Rect collisionBox;
 
     // max and min X values of screen that player can travel in
     private int maxX;
@@ -41,6 +44,8 @@ public class PlayerShip {
         minX = 0;
 
         boosting = false;
+
+        collisionBox = new Rect(xPos, yPos, bitmap.getWidth(), bitmap.getHeight());
     }
 
     //setting boosting true
@@ -93,6 +98,15 @@ public class PlayerShip {
         if (xPos > maxX) {
             xPos = maxX;
         }
+
+        collisionBox.left = xPos;
+        collisionBox.top = yPos;
+        collisionBox.right = xPos + bitmap.getWidth();
+        collisionBox.bottom = yPos + bitmap.getHeight();
+    }
+
+    public Rect getCollisionBox() {
+        return collisionBox;
     }
 
     public Bitmap getBitmap() {

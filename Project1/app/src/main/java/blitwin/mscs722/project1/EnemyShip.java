@@ -3,6 +3,7 @@ package blitwin.mscs722.project1;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.util.Log;
 
 import java.util.Random;
@@ -22,6 +23,8 @@ public class EnemyShip {
     private int maxX;
     private int minX;
 
+    private Rect collisionBox;
+
     private int maxY;
     private int minY;
 
@@ -31,7 +34,6 @@ public class EnemyShip {
 
         // rescale enemies
         bitmap = Bitmap.createScaledBitmap(bitmap, screenWidth / 5, screenHeight / 10, true);
-
 
         //initializing min and max coordinates
         maxX = screenWidth;
@@ -48,8 +50,7 @@ public class EnemyShip {
             xPos = 20;
         }
 
-
-
+        collisionBox = new Rect(xPos, yPos, bitmap.getWidth(), bitmap.getHeight());
     }
 
     public void update() {
@@ -66,6 +67,19 @@ public class EnemyShip {
                 xPos = 20;
             }
         }
+
+        collisionBox.left = xPos;
+        collisionBox.top = yPos;
+        collisionBox.right = xPos + bitmap.getWidth();
+        collisionBox.bottom = yPos + bitmap.getHeight();
+    }
+
+    public void setY(int y) {
+        this.yPos = y;
+    }
+
+    public Rect getCollisionBox() {
+        return collisionBox;
     }
 
     public Bitmap getBitmap() {

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -32,6 +33,8 @@ public class GameView extends SurfaceView implements Runnable {
 
     private EnemyShip[] enemies;
 
+    private Explosion explosion;
+
     private int enemyCount = 3;
 
     public GameView(Context context) {
@@ -56,6 +59,8 @@ public class GameView extends SurfaceView implements Runnable {
         for (int i = 0; i < enemyCount; i++) {
             enemies[i] = new EnemyShip(context, screenWidth, screenHeight);
         }
+
+        explosion = new Explosion(context);
     }
 
     @Override
@@ -84,6 +89,8 @@ public class GameView extends SurfaceView implements Runnable {
             for (int i = 0; i < enemyCount; i++) {
                 canvas.drawBitmap(enemies[i].getBitmap(), enemies[i].getXPos(), enemies[i].getYPos(), paint);
             }
+            // draw explosion
+            canvas.drawBitmap(explosion.getBitmap(), explosion.getXPos(), explosion.getYPos(), paint);
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
     }
@@ -91,9 +98,20 @@ public class GameView extends SurfaceView implements Runnable {
     private void update() {
         player.update();
 
+        explosion.setXPos(-200);
+        explosion.setYPos(-200);
+
         // enemies update based on player speed
         for (int i = 0; i < enemyCount; i++) {
             enemies[i].update();
+
+            // detect player collision
+            if (Rect.intersects(player.getCollisionBox(), enemies[i].getCollisionBox())) {
+                // draw explosion and remove enemy from game view
+                explosion.setXPos(enemies[i].getXPos());
+                explosion.setYPos(enemies[i].getYPos());
+                enemies[i].setY(-200);
+            }
         }
     }
 
