@@ -30,6 +30,10 @@ public class GameView extends SurfaceView implements Runnable {
     private Canvas canvas;
     private SurfaceHolder surfaceHolder;
 
+    private EnemyShip[] enemies;
+
+    private int enemyCount = 3;
+
     public GameView(Context context) {
         super(context);
 
@@ -47,6 +51,11 @@ public class GameView extends SurfaceView implements Runnable {
 
         surfaceHolder = getHolder();
         paint = new Paint();
+
+        enemies = new EnemyShip[enemyCount];
+        for (int i = 0; i < enemyCount; i++) {
+            enemies[i] = new EnemyShip(context, screenWidth, screenHeight);
+        }
     }
 
     @Override
@@ -71,12 +80,21 @@ public class GameView extends SurfaceView implements Runnable {
             canvas.drawBitmap(resized_background, 0, 0, null);
             // draw player bitmap
             canvas.drawBitmap(player.getBitmap(), player.getXPos(), player.getYPos(), paint);
+            // draw enemies
+            for (int i = 0; i < enemyCount; i++) {
+                canvas.drawBitmap(enemies[i].getBitmap(), enemies[i].getXPos(), enemies[i].getYPos(), paint);
+            }
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
     }
 
     private void update() {
         player.update();
+
+        // enemies update based on player speed
+        for (int i = 0; i < enemyCount; i++) {
+            enemies[i].update();
+        }
     }
 
     private void control() {

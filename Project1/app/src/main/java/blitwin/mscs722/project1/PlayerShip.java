@@ -34,6 +34,9 @@ public class PlayerShip {
         // get bitmap
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.spaceship);
 
+        // rescale player
+        bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() - 50, bitmap.getHeight() - 100, true);
+
         maxX = screenWidth - bitmap.getWidth();
         minX = 0;
 
