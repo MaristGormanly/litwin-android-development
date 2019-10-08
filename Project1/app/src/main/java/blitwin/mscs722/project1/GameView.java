@@ -8,10 +8,14 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.ImageView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameView extends SurfaceView implements Runnable {
 
@@ -37,6 +41,16 @@ public class GameView extends SurfaceView implements Runnable {
 
     private int enemyCount = 3;
 
+    private PlayerLaser[] lasers;
+
+    private ArrayList<PlayerLaser> lasersInPlay = new ArrayList<>();
+
+   // private PlayerLaser laser;
+
+    //private PlayerLaser playerLaserArray[] = new PlayerLaser[playerLaserLimit];
+
+    // int playerLaserCount = 0;
+
     public GameView(Context context) {
         super(context);
 
@@ -59,6 +73,13 @@ public class GameView extends SurfaceView implements Runnable {
         for (int i = 0; i < enemyCount; i++) {
             enemies[i] = new EnemyShip(context, screenWidth, screenHeight);
         }
+
+        lasers = new PlayerLaser[player.getLaserLimit()];
+        for (int i = 0; i < player.getLaserLimit(); i++) {
+            lasers[i] = new PlayerLaser(context, screenWidth, screenHeight);
+        }
+
+        //laser = new PlayerLaser(context, screenWidth, screenHeight);
 
         explosion = new Explosion(context);
     }
@@ -91,6 +112,14 @@ public class GameView extends SurfaceView implements Runnable {
             }
             // draw explosion
             canvas.drawBitmap(explosion.getBitmap(), explosion.getXPos(), explosion.getYPos(), paint);
+            // draw lasers
+//            PlayerLaser laser = new PlayerLaser(this.getContext(), screenWidth, screenHeight);
+//            lasers.add(laser);
+//            canvas.drawBitmap(lasers.get(0).getBitmap(), lasers.get(0).getXPos(), lasers.get(0).getYPos(), paint);
+            for (int i = 0; i < player.getLaserLimit(); i++) {
+                canvas.drawBitmap(lasers[i].getBitmap(), lasers[i].getXPos(), lasers[i].getYPos(), paint);
+            }
+            // unlock canvas
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
     }
@@ -98,10 +127,21 @@ public class GameView extends SurfaceView implements Runnable {
     private void update() {
         player.update();
 
+        Log.d("LaserSize", Integer.toString(lasersInPlay.size()));
+
         explosion.setXPos(-200);
         explosion.setYPos(-200);
 
-        // enemies update based on player speed
+        if (lasersInPlay.size() > 0) {
+            for (int j = 0; j < lasersInPlay.size(); j++) {
+                Log.d("LaserPosition", "Laser " + j + ": " + lasers[j].getXPos() +  "," + lasers[j].getYPos());
+                lasers[j].update();
+                if (!lasers[j].isShooting()) {
+                    lasersInPlay.remove(lasers[j]);
+                }
+            }
+        }
+
         for (int i = 0; i < enemyCount; i++) {
             enemies[i].update();
 
@@ -110,8 +150,25 @@ public class GameView extends SurfaceView implements Runnable {
                 // draw explosion and remove enemy from game view
                 explosion.setXPos(enemies[i].getXPos());
                 explosion.setYPos(enemies[i].getYPos());
-                enemies[i].setY(-200);
+                enemies[i].setYPos(-200);
             }
+
+            // detect player laser hit
+            if (lasersInPlay.size() > 0) {
+                int currentLaserCount = lasersInPlay.size();
+                for (int j = 0; j < currentLaserCount; j++) {
+                    if (Rect.intersects(lasers[j].getCollisionBox(), enemies[i].getCollisionBox())) {
+                        // draw explosion and remove enemy from game view
+                        explosion.setXPos(enemies[i].getXPos());
+                        explosion.setYPos(enemies[i].getYPos());
+                        enemies[i].setYPos(-200);
+                        lasers[j].stopLaser();
+                        player.setLaserCount(currentLaserCount - 1);
+                    }
+                }
+            }
+
+
         }
     }
 
@@ -142,7 +199,8 @@ public class GameView extends SurfaceView implements Runnable {
 
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
-        RectF leftSideScreen = new RectF(0, screenHeight / 4, screenWidth / 2, screenHeight);
+        RectF leftSideScreen = new RectF(0, 0, screenWidth / 2, screenHeight);
+        RectF rightSideScreen = new RectF((screenWidth / 2) + 1, 0, screenWidth, screenHeight);
         int touchXPos = (int) motionEvent.getX();
         int touchYPos = (int) motionEvent.getY();
         switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
@@ -151,12 +209,31 @@ public class GameView extends SurfaceView implements Runnable {
                 break;
 
             case MotionEvent.ACTION_DOWN:
-                if (leftSideScreen.contains(touchXPos, touchYPos)) {
-                    player.moveLeft();
+                if (player.getCollisionBox().contains(touchXPos, touchYPos)) {
+                    if (lasersInPlay.size() < player.getLaserLimit()) {
+                        //player.setLaserCount(player.getLaserCount()+1);
+                        //int currentLaserCount = lasersInPlay.size() + 1;
+                        boolean laserShot = false;
+                        for (int i = 0; i < lasers.length; i++) {
+                            Log.d("LasersLength", Integer.toString(lasers.length));
+                            Log.d("LaserShotPos", i + " " + lasers[i].getYPos());
+                            if (lasers[i].getYPos() < 0 && !laserShot) {
+                                player.shoot(lasers[i]);
+                                lasersInPlay.add(lasers[i]);
+                                laserShot = true;
+                            }
+                        }
+
+                        Log.d("TouchShip", "Touched the ship at coordinates" + touchXPos + touchYPos);
+                    }
                 } else {
-                    player.moveRight();
+                    if (leftSideScreen.contains(touchXPos, touchYPos)) {
+                        player.moveLeft();
+                    } else if (rightSideScreen.contains(touchXPos, touchYPos)) {
+                        player.moveRight();
+                    }
+                    player.setBoosting();
                 }
-                player.setBoosting();
                 break;
         }
         return true;

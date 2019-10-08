@@ -74,7 +74,7 @@ public class EnemyShip {
         collisionBox.bottom = yPos + bitmap.getHeight();
     }
 
-    public void setY(int y) {
+    public void setYPos(int y) {
         this.yPos = y;
     }
 

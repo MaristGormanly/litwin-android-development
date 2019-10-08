@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
 public class PlayerShip {
+
     private Bitmap bitmap;
 
     // player coordinates
@@ -21,6 +22,10 @@ public class PlayerShip {
     private final int MAX_SPEED = 30;
 
     private Rect collisionBox;
+
+    private int laserCount = 0;
+
+    private int laserLimit = 1;
 
     // max and min X values of screen that player can travel in
     private int maxX;
@@ -57,7 +62,15 @@ public class PlayerShip {
     public void stopBoosting() {
         boosting = false;
     }
-    
+
+    public void setLaserCount(int laserCount) {
+        this.laserCount = laserCount;
+    }
+
+    public void setLaserLimit(int laserLimit) {
+        this.laserLimit = laserLimit;
+    }
+
     public void moveLeft() {
         moveDirection = "left";
     }
@@ -123,6 +136,20 @@ public class PlayerShip {
 
     public int getSpeed() {
         return speed;
+    }
+
+    public int getLaserCount() {
+        return laserCount;
+    }
+
+    public int getLaserLimit() {
+        return laserLimit;
+    }
+
+    public void shoot(PlayerLaser laser) {
+        laser.setXPos(this.getXPos());
+        laser.setYPos(this.getYPos());
+        laser.setShooting(true);
     }
 
 }
