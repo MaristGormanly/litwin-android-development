@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -45,6 +47,8 @@ public class GameView extends SurfaceView implements Runnable {
 
     private ArrayList<PlayerLaser> lasersInPlay = new ArrayList<>();
 
+    private Paint scoreDisplay = new Paint();
+
    // private PlayerLaser laser;
 
     //private PlayerLaser playerLaserArray[] = new PlayerLaser[playerLaserLimit];
@@ -82,6 +86,12 @@ public class GameView extends SurfaceView implements Runnable {
         //laser = new PlayerLaser(context, screenWidth, screenHeight);
 
         explosion = new Explosion(context);
+
+        // draw score
+        scoreDisplay.setColor(Color.WHITE);
+        scoreDisplay.setTextSize(70);
+        scoreDisplay.setTypeface(Typeface.DEFAULT_BOLD);
+        scoreDisplay.setAntiAlias(true);
     }
 
     @Override
@@ -119,6 +129,7 @@ public class GameView extends SurfaceView implements Runnable {
             for (int i = 0; i < player.getLaserLimit(); i++) {
                 canvas.drawBitmap(lasers[i].getBitmap(), lasers[i].getXPos(), lasers[i].getYPos(), paint);
             }
+            canvas.drawText("Score: " + player.getScore(), 20, 60, scoreDisplay);
             // unlock canvas
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
@@ -164,6 +175,7 @@ public class GameView extends SurfaceView implements Runnable {
                         enemies[i].setYPos(-200);
                         lasers[j].stopLaser();
                         player.setLaserCount(currentLaserCount - 1);
+                        player.addPoints(5);
                     }
                 }
             }

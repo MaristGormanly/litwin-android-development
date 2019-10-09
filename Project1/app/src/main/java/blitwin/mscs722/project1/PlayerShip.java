@@ -34,6 +34,9 @@ public class PlayerShip {
     // ship will either move left or right
     private String moveDirection;
 
+    // player score
+    private int score = 0;
+
     public PlayerShip(Context context, int screenWidth, int screenHeight) {
         xPos = screenWidth / 2;
         yPos = screenHeight - (screenHeight / 4);
@@ -138,6 +141,8 @@ public class PlayerShip {
         return speed;
     }
 
+    public int getScore() { return score; }
+
     public int getLaserCount() {
         return laserCount;
     }
@@ -150,6 +155,10 @@ public class PlayerShip {
         laser.setXPos(this.getXPos());
         laser.setYPos(this.getYPos());
         laser.setShooting(true);
+    }
+
+    public void addPoints(int points) {
+        score += points;
     }
 
 }
