@@ -10,6 +10,9 @@
     <string name="ring_planet">ring_planet</string>
     <string name="big_planet">big_planet</string>
     <string name="credit">All art used with permission from OpenGameArt.org</string>
+    <string name="gameover">Game Over</string>
+    <string name="gameover_score">Final score: </string>
+    <string name="play_again">Play Again</string>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 </resources>

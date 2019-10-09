@@ -2,7 +2,9 @@ package blitwin.mscs722.project1;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -15,6 +17,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,6 +51,8 @@ public class GameView extends SurfaceView implements Runnable {
     private ArrayList<PlayerLaser> lasersInPlay = new ArrayList<>();
 
     private Paint scoreDisplay = new Paint();
+
+    private Bitmap life[] = new Bitmap[2];
 
    // private PlayerLaser laser;
 
@@ -92,6 +97,11 @@ public class GameView extends SurfaceView implements Runnable {
         scoreDisplay.setTextSize(70);
         scoreDisplay.setTypeface(Typeface.DEFAULT_BOLD);
         scoreDisplay.setAntiAlias(true);
+
+        life[0] = BitmapFactory.decodeResource(getResources(), R.drawable.heart);
+        life[1] = BitmapFactory.decodeResource(getResources(), R.drawable.brokenheart);
+        // rescale heart
+        life[1] = Bitmap.createScaledBitmap(life[1], life[1].getWidth() - 310, life[1].getHeight() - 310, true);
     }
 
     @Override
@@ -130,6 +140,15 @@ public class GameView extends SurfaceView implements Runnable {
                 canvas.drawBitmap(lasers[i].getBitmap(), lasers[i].getXPos(), lasers[i].getYPos(), paint);
             }
             canvas.drawText("Score: " + player.getScore(), 20, 60, scoreDisplay);
+            for (int i = 0; i < 3; i++) {
+                int x = (int) ((screenWidth - 300) + life[0].getWidth() *  i);
+                int y = 0;
+                if (i < player.getlifePoints()) {
+                    canvas.drawBitmap(life[0], x, y, null);
+                } else {
+                    canvas.drawBitmap(life[1], x, y, null);
+                }
+            }
             // unlock canvas
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
@@ -162,6 +181,16 @@ public class GameView extends SurfaceView implements Runnable {
                 explosion.setXPos(enemies[i].getXPos());
                 explosion.setYPos(enemies[i].getYPos());
                 enemies[i].setYPos(-200);
+                player.hit();
+                player.addPoints(5);
+                if (player.getlifePoints() == 0) {
+                    //Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
+                    // go to game over activity
+                    Intent gameOver = new Intent(getContext(), GameOverActivity.class);
+                    gameOver.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    getContext().startActivity(gameOver);
+
+                }
             }
 
             // detect player laser hit

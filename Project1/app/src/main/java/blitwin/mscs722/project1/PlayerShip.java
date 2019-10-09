@@ -37,6 +37,9 @@ public class PlayerShip {
     // player score
     private int score = 0;
 
+    // number of hits until player dies
+    private int lifePoints = 3;
+
     public PlayerShip(Context context, int screenWidth, int screenHeight) {
         xPos = screenWidth / 2;
         yPos = screenHeight - (screenHeight / 4);
@@ -143,13 +146,11 @@ public class PlayerShip {
 
     public int getScore() { return score; }
 
-    public int getLaserCount() {
-        return laserCount;
-    }
+    public int getlifePoints() { return lifePoints; }
 
-    public int getLaserLimit() {
-        return laserLimit;
-    }
+    public int getLaserCount() { return laserCount; }
+
+    public int getLaserLimit() { return laserLimit; }
 
     public void shoot(PlayerLaser laser) {
         laser.setXPos(this.getXPos());
@@ -160,6 +161,12 @@ public class PlayerShip {
     public void addPoints(int points) {
         score += points;
     }
+
+    public void hit() {
+        lifePoints -= 1;
+    }
+
+
 
 }
 

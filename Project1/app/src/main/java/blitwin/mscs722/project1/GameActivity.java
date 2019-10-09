@@ -13,7 +13,6 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         gameView = new GameView(this);
         setContentView(gameView);
-        //setContentView(R.layout.activity_game);
     }
 
     @Override
