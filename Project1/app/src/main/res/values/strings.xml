@@ -13,6 +13,8 @@
     <string name="gameover">Game Over</string>
     <string name="gameover_score">Final score: </string>
     <string name="play_again">Play Again</string>
+    <string name="high_scores">High Scores</string>
+    <string name="main_menu">Main Menu</string>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 </resources>

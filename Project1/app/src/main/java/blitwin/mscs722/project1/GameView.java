@@ -26,7 +26,7 @@ public class GameView extends SurfaceView implements Runnable {
 
     volatile boolean isPlaying;
 
-    private ImageView imageView = (ImageView)findViewById(R.id.imageView);
+    //private ImageView imageView = (ImageView)findViewById(R.id.imageView);
 
     private Thread gameThread = null;
 
@@ -190,13 +190,14 @@ public class GameView extends SurfaceView implements Runnable {
                 explosion.setYPos(enemies[i].getYPos());
                 enemies[i].setYPos(-200);
                 player.hit();
-                player.addPoints(5);
                 if (player.getlifePoints() == 0) {
                     //Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
                     // go to game over activity
-                    Intent gameOver = new Intent(getContext(), GameOverActivity.class);
-                    gameOver.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    getContext().startActivity(gameOver);
+                    Intent gameOverIntent = new Intent(getContext(), GameOverActivity.class);
+                    gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    // send total score
+                    gameOverIntent.putExtra("score", player.getScore());
+                    getContext().startActivity(gameOverIntent);
 
                 }
             }

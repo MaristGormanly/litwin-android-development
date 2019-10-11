@@ -8,7 +8,7 @@
     tools:context=".GameOverActivity">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/gameOverText"
         android:layout_width="194dp"
         android:layout_height="0dp"
         android:layout_marginTop="86dp"
@@ -17,35 +17,77 @@
         android:text="@string/gameover"
         android:textColor="@color/white"
         android:textSize="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintBottom_toTopOf="@+id/finalScore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/finalScore"
         android:layout_width="196dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="109dp"
+        android:layout_marginBottom="1dp"
         android:gravity="center"
         android:text="@string/gameover_score"
         android:textColor="@color/white"
         android:textSize="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/gameOverScore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/gameOverText" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="170dp"
+        android:id="@+id/gameOverPlayAgainButton"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="236dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="7dp"
         android:gravity="center"
         android:onClick="launchGame"
         android:text="@string/play_again"
+        app:layout_constraintBottom_toTopOf="@+id/gameOverHighScoresButton"
+        app:layout_constraintEnd_toEndOf="@+id/gameOverHighScoresButton"
+        app:layout_constraintStart_toStartOf="@+id/gameOverHighScoresButton"
+        app:layout_constraintTop_toBottomOf="@+id/gameOverScore" />
+
+    <TextView
+        android:id="@+id/gameOverScore"
+        android:layout_width="121dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="54dp"
+        android:gravity="center"
+        android:text="score"
+        android:textColor="@color/white"
+        android:textSize="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/gameOverPlayAgainButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/finalScore" />
+
+    <Button
+        android:id="@+id/gameOverHighScoresButton"
+        android:layout_width="176dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:onClick="viewHighScores"
+        android:text="@string/view_high_scores"
+        app:layout_constraintBottom_toTopOf="@+id/gameOverMenuButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameOverPlayAgainButton" />
+
+    <Button
+        android:id="@+id/gameOverMenuButton"
+        android:layout_width="178dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="92dp"
+        android:gravity="center"
+        android:onClick="mainMenu"
+        android:text="@string/main_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/gameOverHighScoresButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
