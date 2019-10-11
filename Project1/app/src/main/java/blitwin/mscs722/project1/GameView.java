@@ -16,17 +16,12 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GameView extends SurfaceView implements Runnable {
 
     volatile boolean isPlaying;
-
-    //private ImageView imageView = (ImageView)findViewById(R.id.imageView);
 
     private Thread gameThread = null;
 
@@ -55,12 +50,6 @@ public class GameView extends SurfaceView implements Runnable {
     private Bitmap life[] = new Bitmap[2];
 
     private int enemySpeedUp;
-
-   // private PlayerLaser laser;
-
-    //private PlayerLaser playerLaserArray[] = new PlayerLaser[playerLaserLimit];
-
-    // int playerLaserCount = 0;
 
     public GameView(Context context) {
         super(context);
@@ -136,10 +125,7 @@ public class GameView extends SurfaceView implements Runnable {
             }
             // draw explosion
             canvas.drawBitmap(explosion.getBitmap(), explosion.getXPos(), explosion.getYPos(), paint);
-            // draw lasers
-//            PlayerLaser laser = new PlayerLaser(this.getContext(), screenWidth, screenHeight);
-//            lasers.add(laser);
-//            canvas.drawBitmap(lasers.get(0).getBitmap(), lasers.get(0).getXPos(), lasers.get(0).getYPos(), paint);
+
             for (int i = 0; i < player.getLaserLimit(); i++) {
                 canvas.drawBitmap(lasers[i].getBitmap(), lasers[i].getXPos(), lasers[i].getYPos(), paint);
             }
@@ -191,7 +177,6 @@ public class GameView extends SurfaceView implements Runnable {
                 enemies[i].setYPos(-200);
                 player.hit();
                 if (player.getlifePoints() == 0) {
-                    //Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
                     // go to game over activity
                     Intent gameOverIntent = new Intent(getContext(), GameOverActivity.class);
                     gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -261,8 +246,6 @@ public class GameView extends SurfaceView implements Runnable {
             case MotionEvent.ACTION_DOWN:
                 if (player.getCollisionBox().contains(touchXPos, touchYPos)) {
                     if (lasersInPlay.size() < player.getLaserLimit()) {
-                        //player.setLaserCount(player.getLaserCount()+1);
-                        //int currentLaserCount = lasersInPlay.size() + 1;
                         boolean laserShot = false;
                         for (int i = 0; i < lasers.length; i++) {
                             Log.d("LasersLength", Integer.toString(lasers.length));
