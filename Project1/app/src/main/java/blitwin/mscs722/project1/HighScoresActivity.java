@@ -29,7 +29,6 @@ public class HighScoresActivity extends AppCompatActivity {
         // save new high score
         if (score > highScore) {
             highScoresList.setText(Integer.toString(score));
-            //SharedPreferences.Editor editor = highscores.edit();
             editor.putInt("HIGH_SCORE", score);
             editor.commit();
         } else {
