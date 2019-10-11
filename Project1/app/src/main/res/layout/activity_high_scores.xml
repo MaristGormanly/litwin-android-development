@@ -12,12 +12,12 @@
         android:layout_width="199dp"
         android:layout_height="0dp"
         android:layout_marginTop="45dp"
-        android:layout_marginBottom="455dp"
+        android:layout_marginBottom="24dp"
         android:gravity="center"
         android:text="@string/high_scores"
         android:textColor="@color/white"
         android:textSize="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/highScoresMainMenuButton"
+        app:layout_constraintBottom_toTopOf="@+id/highScoresList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,12 +26,38 @@
         android:id="@+id/highScoresMainMenuButton"
         android:layout_width="164dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="105dp"
+        android:layout_marginBottom="21dp"
         android:gravity="center"
         android:onClick="mainMenu"
         android:text="@string/main_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/highScoresList" />
+
+    <TextView
+        android:id="@+id/highScoresList"
+        android:layout_width="204dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="53dp"
+        android:gravity="center"
+        android:text="@string/tesths"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/highScoresMainMenuButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/highScores" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="36dp"
+        android:gravity="center"
+        android:onClick="resetHighScores"
+        android:text="@string/reset_high_scores"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/highScoresMainMenuButton"
+        app:layout_constraintTop_toBottomOf="@+id/highScoresMainMenuButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

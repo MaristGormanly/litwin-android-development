@@ -3,6 +3,7 @@ package blitwin.mscs722.project1;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -181,7 +182,10 @@ public class GameView extends SurfaceView implements Runnable {
                     Intent gameOverIntent = new Intent(getContext(), GameOverActivity.class);
                     gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     // send total score
-                    gameOverIntent.putExtra("score", player.getScore());
+                    SharedPreferences highscores = getContext().getSharedPreferences("highscores", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = highscores.edit();
+                    editor.putInt("FINAL_SCORE", player.getScore());
+                    editor.commit();
                     getContext().startActivity(gameOverIntent);
 
                 }
