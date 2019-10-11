@@ -53,14 +53,14 @@ public class EnemyShip {
         collisionBox = new Rect(xPos, yPos, bitmap.getWidth(), bitmap.getHeight());
     }
 
-    public void update() {
-        // increase y coordinate so that enemy will move top to botttom
-        yPos += speed;
+    public void update(int speedUp) {
+        // increase y coordinate so that enemy will move top to bottom
+        yPos = yPos + speed + speedUp;
         // if the enemy reaches the bottom
-        if (yPos > maxY - bitmap.getHeight()) {
+        if (yPos > maxY - bitmap.getHeight() || yPos < 0) {
             // adding the enemy again to the top
             Random generator = new Random();
-            speed = generator.nextInt(10) + 10;
+            speed = generator.nextInt(6) + 10;
             yPos = 0;
             xPos = generator.nextInt(maxX) - bitmap.getWidth();
             if (xPos < minX) {

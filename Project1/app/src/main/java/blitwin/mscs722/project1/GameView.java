@@ -54,6 +54,8 @@ public class GameView extends SurfaceView implements Runnable {
 
     private Bitmap life[] = new Bitmap[2];
 
+    private int enemySpeedUp;
+
    // private PlayerLaser laser;
 
     //private PlayerLaser playerLaserArray[] = new PlayerLaser[playerLaserLimit];
@@ -82,6 +84,8 @@ public class GameView extends SurfaceView implements Runnable {
         for (int i = 0; i < enemyCount; i++) {
             enemies[i] = new EnemyShip(context, screenWidth, screenHeight);
         }
+        // current value that enemy speed is increased by
+        enemySpeedUp = 0;
 
         lasers = new PlayerLaser[player.getLaserLimit()];
         for (int i = 0; i < player.getLaserLimit(); i++) {
@@ -171,9 +175,13 @@ public class GameView extends SurfaceView implements Runnable {
                 }
             }
         }
+        // increase enemy speed every 50 points
+        if (player.getScore() % 50 == 0 && player.getScore() > 0) {
+            enemySpeedUp += 1;
+        }
 
         for (int i = 0; i < enemyCount; i++) {
-            enemies[i].update();
+            enemies[i].update(enemySpeedUp);
 
             // detect player collision
             if (Rect.intersects(player.getCollisionBox(), enemies[i].getCollisionBox())) {
