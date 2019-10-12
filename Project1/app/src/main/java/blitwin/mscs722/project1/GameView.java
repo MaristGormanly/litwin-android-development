@@ -184,8 +184,7 @@ public class GameView extends SurfaceView implements Runnable {
                     // send total score
                     SharedPreferences highscores = getContext().getSharedPreferences("highscores", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = highscores.edit();
-                    editor.putInt("FINAL_SCORE", player.getScore());
-                    editor.commit();
+                    editor.putInt("FINAL_SCORE", player.getScore()).apply();
                     getContext().startActivity(gameOverIntent);
 
                 }

@@ -17,6 +17,16 @@
     <string name="main_menu">Main Menu</string>
     <string name="reset_high_scores">Reset High Scores</string>
     <string name="tesths">testHS</string>
+    <string name="score1">1.</string>
+    <string name="score2">2.</string>
+    <string name="score3">3.</string>
+    <string name="score4">4.</string>
+    <string name="score5">5.</string>
+    <string name="score6">6.</string>
+    <string name="score7">7.</string>
+    <string name="score8">8.</string>
+    <string name="score9">9.</string>
+    <string name="score10">10.</string>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 </resources>

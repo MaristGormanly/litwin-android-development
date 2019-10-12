@@ -8,51 +8,142 @@
     tools:context=".HighScoresActivity">
 
     <TextView
+        android:id="@+id/score2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:textSize="32dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/score3"
+        app:layout_constraintStart_toStartOf="@+id/score1"
+        app:layout_constraintTop_toBottomOf="@+id/score1" />
+
+    <TextView
+        android:id="@+id/score3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:textSize="32dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/score4"
+        app:layout_constraintStart_toStartOf="@+id/score2"
+        app:layout_constraintTop_toBottomOf="@+id/score2" />
+
+    <TextView
+        android:id="@+id/score4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:textSize="32dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/score5"
+        app:layout_constraintStart_toStartOf="@+id/score3"
+        app:layout_constraintTop_toBottomOf="@+id/score3" />
+
+    <TextView
+        android:id="@+id/score5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:textSize="32dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/score6"
+        app:layout_constraintStart_toStartOf="@+id/score4"
+        app:layout_constraintTop_toBottomOf="@+id/score4" />
+
+    <TextView
+        android:id="@+id/score6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:textSize="32dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/score7"
+        app:layout_constraintStart_toStartOf="@+id/score5"
+        app:layout_constraintTop_toBottomOf="@+id/score5" />
+
+    <TextView
+        android:id="@+id/score7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:textSize="32dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/score8"
+        app:layout_constraintStart_toStartOf="@+id/score6"
+        app:layout_constraintTop_toBottomOf="@+id/score6" />
+
+    <TextView
+        android:id="@+id/score8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:textSize="32dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/score9"
+        app:layout_constraintStart_toStartOf="@+id/score7"
+        app:layout_constraintTop_toBottomOf="@+id/score7" />
+
+    <TextView
+        android:id="@+id/score9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="11dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:textSize="32dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/score10"
+        app:layout_constraintStart_toStartOf="@+id/score8"
+        app:layout_constraintTop_toBottomOf="@+id/score8" />
+
+    <TextView
+        android:id="@+id/score10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="55dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:textSize="32dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/highScoresMainMenuButton"
+        app:layout_constraintStart_toStartOf="@+id/score9"
+        app:layout_constraintTop_toBottomOf="@+id/score9" />
+
+    <TextView
         android:id="@+id/highScores"
-        android:layout_width="199dp"
+        android:layout_width="202dp"
         android:layout_height="0dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="21dp"
         android:gravity="center"
         android:text="@string/high_scores"
         android:textColor="@color/white"
         android:textSize="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/highScoresList"
+        app:layout_constraintBottom_toTopOf="@+id/score1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/highScoresMainMenuButton"
-        android:layout_width="151dp"
-        android:layout_height="72dp"
-        android:layout_marginBottom="32dp"
-        android:gravity="center"
-        android:onClick="mainMenu"
-        android:text="@string/main_menu"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/highScoresList" />
-
-    <TextView
-        android:id="@+id/highScoresList"
-        android:layout_width="204dp"
+        android:id="@+id/resetHighScoresButton"
+        android:layout_width="184dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="174dp"
-        android:gravity="center"
-        android:text="@string/tesths"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/highScoresMainMenuButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/highScores" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="179dp"
-        android:layout_height="72dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="16dp"
         android:gravity="center"
         android:onClick="resetHighScores"
         android:text="@string/reset_high_scores"
@@ -60,4 +151,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/highScoresMainMenuButton" />
+
+    <Button
+        android:id="@+id/highScoresMainMenuButton"
+        android:layout_width="169dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="9dp"
+        android:gravity="center"
+        android:onClick="mainMenu"
+        android:text="@string/main_menu"
+        app:layout_constraintBottom_toTopOf="@+id/resetHighScoresButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/score10" />
+
+    <TextView
+        android:id="@+id/score1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:textSize="32dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/score2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/highScores" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class GameOverActivity extends AppCompatActivity {
 
     private TextView scoreDisplay;
@@ -32,6 +35,28 @@ public class GameOverActivity extends AppCompatActivity {
     }
 
     public void viewHighScores(View view) {
+        SharedPreferences highscores = getSharedPreferences("highscores", Context.MODE_PRIVATE);
+        int score = highscores.getInt("FINAL_SCORE", 0);
+
+        String highscoresString = highscores.getString("HIGHSCORES_LIST", "");
+        ArrayList<Integer> highScoresIntegerList = new ArrayList<>();
+        String string[] = highscoresString.split(",");
+        for (String s: string) {
+            highScoresIntegerList.add(Integer.parseInt(s));
+        }
+        Collections.sort(highScoresIntegerList, Collections.reverseOrder());
+        // check if score is higher than lowest high score
+        if (score > Collections.min(highScoresIntegerList)) {
+            highScoresIntegerList.set(9, score);
+        }
+        Collections.sort(highScoresIntegerList, Collections.reverseOrder());
+        // update permanent high score list
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < highScoresIntegerList.size(); i++) {
+            str.append(highScoresIntegerList.get(i)).append(",");
+        }
+        // show new high scores
+        highscores.edit().putString("HIGHSCORES_LIST", str.toString()).apply();
         Intent highScoresIntent = new Intent(this, HighScoresActivity.class);
         startActivity(highScoresIntent);
     }
