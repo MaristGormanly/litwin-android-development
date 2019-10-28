@@ -9,28 +9,30 @@
 
     <Button
         android:id="@+id/still_there"
-        android:layout_width="102dp"
-        android:layout_height="37dp"
+        android:layout_width="113sp"
+        android:layout_height="59sp"
         android:layout_marginStart="152dp"
         android:layout_marginTop="76dp"
         android:text="@string/still_there"
+        android:onClick="playSound"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/damn_son"
-        android:layout_width="102dp"
-        android:layout_height="37dp"
+        android:layout_width="113sp"
+        android:layout_height="59sp"
         android:layout_marginStart="276dp"
         android:layout_marginTop="76dp"
         android:text="@string/damn_son"
+        android:onClick="playSound"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -42,7 +44,7 @@
         app:layout_constraintVertical_bias="0.022" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/copyright"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -54,11 +56,12 @@
 
     <Button
         android:id="@+id/come_get_some"
-        android:layout_width="102dp"
-        android:layout_height="37dp"
+        android:layout_width="113sp"
+        android:layout_height="59sp"
         android:layout_marginStart="29dp"
         android:layout_marginTop="77dp"
         android:text="@string/come_get_some"
+        android:onClick="playSound"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
