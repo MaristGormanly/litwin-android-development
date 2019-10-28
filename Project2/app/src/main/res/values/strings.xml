@@ -7,4 +7,9 @@
     <string name="speed_1x">Speed: 1X</string>
     <string name="speed_2x">Speed: 2X</string>
     <string name="speed_0_5x">Speed: 0.5X</string>
+    <string-array name="playback_choices">
+        <item>0.5X</item>
+        <item>1X</item>
+        <item>2X</item>
+    </string-array>
 </resources>
