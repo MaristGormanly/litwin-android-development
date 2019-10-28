@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 //    Button cgs;
 //    Button st;
     int maxStreams = 3;
+    float soundRate = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +50,27 @@ public class MainActivity extends AppCompatActivity {
         // Play different sound depending on which button is pressed
         switch (view.getId()) {
             case R.id.come_get_some:
-                soundPool.play(cgs, 1, 1, 0, 0, 1);
+                soundPool.play(cgs, 1, 1, 0, 0, soundRate);
                 break;
             case R.id.damn_son:
-                soundPool.play(ds, 1, 1, 0, 0, 1);
+                soundPool.play(ds, 1, 1, 0, 0, soundRate);
                 break;
             case R.id.still_there:
-                soundPool.play(st, 1, 1, 0, 0, 1);
+                soundPool.play(st, 1, 1, 0, 0, soundRate);
                 break;
         }
+    }
+
+    public void speed2X(View view) {
+        soundRate = 2;
+    }
+
+    public void speed1X(View view) {
+        soundRate = 1;
+    }
+
+    public void speed05X(View view) {
+        soundRate = (float) 0.5;
     }
 
     @Override

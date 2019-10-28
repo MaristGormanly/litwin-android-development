@@ -9,39 +9,39 @@
 
     <Button
         android:id="@+id/still_there"
-        android:layout_width="113sp"
+        android:layout_width="0sp"
         android:layout_height="59sp"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="76dp"
-        android:text="@string/still_there"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="11dp"
         android:onClick="playSound"
+        android:text="@string/still_there"
         android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/damn_son"
+        app:layout_constraintStart_toEndOf="@+id/come_get_some"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <Button
         android:id="@+id/damn_son"
-        android:layout_width="113sp"
+        android:layout_width="0sp"
         android:layout_height="59sp"
-        android:layout_marginStart="276dp"
-        android:layout_marginTop="76dp"
-        android:text="@string/damn_son"
+        android:layout_marginEnd="22dp"
         android:onClick="playSound"
+        android:text="@string/damn_son"
         android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/still_there"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/still_there" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/app_name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintStart_toEndOf="@+id/come_get_some"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/copyright"
@@ -56,14 +56,48 @@
 
     <Button
         android:id="@+id/come_get_some"
-        android:layout_width="113sp"
+        android:layout_width="0sp"
         android:layout_height="59sp"
         android:layout_marginStart="29dp"
-        android:layout_marginTop="77dp"
-        android:text="@string/come_get_some"
+        android:layout_marginEnd="10dp"
         android:onClick="playSound"
+        android:text="@string/come_get_some"
         android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/still_there"
+        app:layout_constraintEnd_toStartOf="@+id/still_there"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/speed2x"
+        android:layout_width="0sp"
+        android:layout_height="59sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginEnd="30dp"
+        android:onClick="speed2X"
+        android:text="@string/speed_2x"
+        app:layout_constraintBaseline_toBaselineOf="@+id/speed1x"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/speed1x"
+        android:layout_width="0sp"
+        android:layout_height="59sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginBottom="316dp"
+        android:gravity="center"
+        android:onClick="speed1X"
+        android:text="@string/speed_1x"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/speed05x" />
+
+    <Button
+        android:id="@+id/speed05x"
+        android:layout_width="0sp"
+        android:layout_height="59sp"
+        android:layout_marginStart="40dp"
+        android:onClick="speed05X"
+        android:text="@string/speed_0_5x"
+        app:layout_constraintBaseline_toBaselineOf="@+id/speed1x"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
