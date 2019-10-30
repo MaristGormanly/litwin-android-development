@@ -8,6 +8,11 @@
     <string name="speed_2x">Speed: 2X</string>
     <string name="speed_0_5x">Speed: 0.5X</string>
     <string name="stop_all">Stop All</string>
+    <string name="start_game">Start</string>
+    <string name="upload_sound_file">Upload Sound File</string>
+    <string name="record_a_sound">Record a Sound</string>
+    <string name="welcome">Welcome to B-Lit\'s Beat Blender! You can start now, \n or upload or record your own sound first.</string>
+    <string name="menu">Menu</string>
     <string-array name="playback_choices">
         <item>0.5X Speed</item>
         <item>1X Speed</item>

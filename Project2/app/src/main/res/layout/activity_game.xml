@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Spinner
+        android:id="@+id/cgsSpinner"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/stSpinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/come_get_some" />
+
+    <Spinner
+        android:id="@+id/stSpinner"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintEnd_toStartOf="@+id/dsSpinner"
+        app:layout_constraintStart_toEndOf="@+id/cgsSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/still_there" />
+
+    <Spinner
+        android:id="@+id/dsSpinner"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/stSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/damn_son" />
+
+    <Spinner
+        android:id="@+id/cgsLoop"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/stLoop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cgsSpinner" />
+
+    <Spinner
+        android:id="@+id/stLoop"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintEnd_toStartOf="@+id/dsLoop"
+        app:layout_constraintStart_toEndOf="@+id/cgsLoop"
+        app:layout_constraintTop_toBottomOf="@+id/stSpinner"
+        app:layout_constraintTop_toTopOf="@+id/cgsLoop" />
+
+
+    <Spinner
+        android:id="@+id/dsLoop"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/stLoop"
+        app:layout_constraintTop_toBottomOf="@+id/dsSpinner"
+        app:layout_constraintTop_toTopOf="@+id/cgsLoop" />
+
+    <Button
+        android:id="@+id/still_there"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="34dp"
+        android:onClick="playSound"
+        android:text="@string/still_there"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/damn_son"
+        app:layout_constraintStart_toEndOf="@+id/come_get_some"
+        app:layout_constraintTop_toTopOf="@+id/come_get_some" />
+
+    <Button
+        android:id="@+id/damn_son"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="41dp"
+        android:onClick="playSound"
+        android:text="@string/damn_son"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/still_there"
+        app:layout_constraintTop_toTopOf="@+id/still_there" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="13dp"
+        android:gravity="center"
+        android:text="@string/app_name"
+        app:layout_constraintEnd_toStartOf="@+id/damn_son"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/copyright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="@string/copyright"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/come_get_some"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="82dp"
+        android:layout_marginEnd="28dp"
+        android:onClick="playSound"
+        android:text="@string/come_get_some"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/still_there"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/stop_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="42dp"
+        android:gravity="center"
+        android:onClick="stopAll"
+        android:text="@string/stop_all"
+        app:layout_constraintBottom_toTopOf="@+id/menu"
+        app:layout_constraintStart_toStartOf="@+id/menu" />
+
+    <Button
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="41dp"
+        android:gravity="center"
+        android:text="@string/menu"
+        android:onClick="menu"
+        app:layout_constraintBottom_toTopOf="@+id/copyright"
+        app:layout_constraintStart_toStartOf="@+id/copyright" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
