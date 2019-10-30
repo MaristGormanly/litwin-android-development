@@ -7,14 +7,10 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
-import java.util.Arrays;
-import java.util.stream.IntStream;
 
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -144,10 +140,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             }
         }
-        //boolean playbackSelected;
-        //boolean loopSelected = Arrays.asList(loopSpinners).contains(parent.getId());
-        Log.d("playbackSelected", Boolean.toString(playbackSelected));
-        Log.d("loopSelected", Boolean.toString(loopSelected));
         float soundRate = 1;
         int loop = 0;
         // depending on which spinner group was selected
@@ -172,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         }
 
+        // change parameter of selected sound
         switch (parent.getId()) {
             case R.id.cgsSpinner:
                 cgsSoundRate = soundRate;
@@ -184,21 +177,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case R.id.cgsLoop:
                 cgsLoop = loop;
-                /*if (cgsLoop == 0) {
-                    soundPool.stop(cgsStreamId);
-                }*/
                 break;
             case R.id.stLoop:
                 stLoop =  loop;
-                /*if (cgsLoop == 0) {
-                    soundPool.stop(stStreamId);
-                }*/
                 break;
             case R.id.dsLoop:
                 dsLoop = loop;
-                /*if (cgsLoop == 0) {
-                    soundPool.stop(dsStreamId);
-                }*/
         }
     }
 
