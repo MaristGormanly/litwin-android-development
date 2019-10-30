@@ -13,14 +13,26 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private SoundPool soundPool;
     private int cgs, st, ds;
-    int maxStreams = 3;
+    int maxStreams = 5;
     float cgsSoundRate = 1;
     float dsSoundRate = 1;
     float stSoundRate = 1;
+    int cgsLoop = 0;
+    int dsLoop = 0;
+    int stLoop = 0;
+    int cgsStreamId;
+    int dsStreamId;
+    int stStreamId;
+    int[] playbackSpinners = {R.id.cgsSpinner, R.id.dsSpinner, R.id.stSpinner};
+    int[] loopSpinners = {R.id.cgsLoop, R.id.dsLoop, R.id.stLoop};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         st = soundPool.load(this, R.raw.stillthere, 1);
         ds = soundPool.load(this, R.raw.damnson, 1);
 
+        // Build the playback option spinners
+
         Spinner spinner = findViewById(R.id.cgsSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.playback_choices, android.R.layout.simple_spinner_item);
@@ -65,21 +79,45 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         spinner3.setSelection(1);
         spinner3.setOnItemSelectedListener(this);
 
+        // Build the loop option spinners
+        Spinner loopSpinner = findViewById(R.id.cgsLoop);
+        ArrayAdapter<CharSequence> loopAdapter = ArrayAdapter.createFromResource(this,
+                R.array.loop_choices, android.R.layout.simple_spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        loopSpinner.setAdapter(loopAdapter);
+        loopSpinner.setSelection(1);
+        loopSpinner.setOnItemSelectedListener(this);
+
+        Spinner loopSpinner2 = findViewById(R.id.stLoop);
+        loopSpinner2.setAdapter(loopAdapter);
+        loopSpinner2.setSelection(1);
+        loopSpinner2.setOnItemSelectedListener(this);
+
+        Spinner loopSpinner3 = findViewById(R.id.dsLoop);
+        loopSpinner3.setAdapter(loopAdapter);
+        loopSpinner3.setSelection(1);
+        loopSpinner3.setOnItemSelectedListener(this);
+
     }
 
     public void playSound(View view) {
         // Play different sound depending on which button is pressed
         switch (view.getId()) {
             case R.id.come_get_some:
-                soundPool.play(cgs, 1, 1, 0, 0, cgsSoundRate);
+                cgsStreamId = soundPool.play(cgs, 1, 1, 0, cgsLoop, cgsSoundRate);
                 break;
             case R.id.damn_son:
-                soundPool.play(ds, 1, 1, 0, 0, dsSoundRate);
+                dsStreamId = soundPool.play(ds, 1, 1, 0, dsLoop, dsSoundRate);
                 break;
             case R.id.still_there:
-                soundPool.play(st, 1, 1, 0, 0, stSoundRate);
+                stStreamId = soundPool.play(st, 1, 1, 0, stLoop, stSoundRate);
                 break;
         }
+    }
+
+    public void stopAll(View view) {
+        soundPool.autoPause();
     }
 
     @Override
@@ -92,18 +130,48 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        float soundRate = 1;
-        Log.d("position", Integer.toString(position));
-        switch (position) {
-            case 0:
-                soundRate = (float) 0.5;
+        boolean playbackSelected = false;
+        boolean loopSelected = false;
+        for (int i : playbackSpinners) {
+            if (i == parent.getId()) {
+                playbackSelected = true;
                 break;
-            case 1:
-                soundRate = 1;
-                break;
-            case 2:
-                soundRate = 2;
+            }
         }
+        for (int i : loopSpinners) {
+            if (i == parent.getId()) {
+                loopSelected = true;
+                break;
+            }
+        }
+        //boolean playbackSelected;
+        //boolean loopSelected = Arrays.asList(loopSpinners).contains(parent.getId());
+        Log.d("playbackSelected", Boolean.toString(playbackSelected));
+        Log.d("loopSelected", Boolean.toString(loopSelected));
+        float soundRate = 1;
+        int loop = 0;
+        // depending on which spinner group was selected
+        if (playbackSelected) {
+            switch (position) {
+                case 0:
+                    soundRate = (float) 0.5;
+                    break;
+                case 1:
+                    soundRate = 1;
+                    break;
+                case 2:
+                    soundRate = 2;
+            }
+        } else if (loopSelected) {
+            switch (position) {
+                case 0:
+                    loop = -1;
+                    break;
+                case 1:
+                    loop = 0;
+            }
+        }
+
         switch (parent.getId()) {
             case R.id.cgsSpinner:
                 cgsSoundRate = soundRate;
@@ -114,6 +182,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case R.id.dsSpinner:
                 dsSoundRate = soundRate;
                 break;
+            case R.id.cgsLoop:
+                cgsLoop = loop;
+                /*if (cgsLoop == 0) {
+                    soundPool.stop(cgsStreamId);
+                }*/
+                break;
+            case R.id.stLoop:
+                stLoop =  loop;
+                /*if (cgsLoop == 0) {
+                    soundPool.stop(stStreamId);
+                }*/
+                break;
+            case R.id.dsLoop:
+                dsLoop = loop;
+                /*if (cgsLoop == 0) {
+                    soundPool.stop(dsStreamId);
+                }*/
         }
     }
 
