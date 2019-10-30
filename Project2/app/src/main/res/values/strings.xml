@@ -8,8 +8,8 @@
     <string name="speed_2x">Speed: 2X</string>
     <string name="speed_0_5x">Speed: 0.5X</string>
     <string-array name="playback_choices">
-        <item>0.5X</item>
-        <item>1X</item>
-        <item>2X</item>
+        <item>0.5X Speed</item>
+        <item>1X Speed</item>
+        <item>2X Speed</item>
     </string-array>
 </resources>
