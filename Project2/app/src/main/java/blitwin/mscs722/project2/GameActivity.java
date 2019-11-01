@@ -161,16 +161,16 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
     public void stopSound(View view) {
         Log.d("here", "in here");
         switch (view.getId()) {
-            case R.id.come_get_some:
+            case R.id.stopCGS:
                 soundPool.pause(cgsStreamId);
                 break;
-            case R.id.damn_son:
+            case R.id.stopDS:
                 soundPool.pause(dsStreamId);
                 break;
-            case R.id.still_there:
+            case R.id.stopST:
                 soundPool.pause(stStreamId);
                 break;
-            case R.id.uploadedSound:
+            case R.id.stopUploaded:
                 uploadedSoundPlayer.pause();
                 uploadedSoundPlayer.seekTo(0);
         }
