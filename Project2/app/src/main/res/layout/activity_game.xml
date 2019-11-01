@@ -7,107 +7,150 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/stopUploaded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="49dp"
+        android:onClick="stopSound"
+        android:text="@string/stop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stopDS" />
+
+    <Spinner
+        android:id="@+id/uploadedSoundLoop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        app:layout_constraintStart_toStartOf="@+id/uploadedSoundSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/uploadedSoundSpinner" />
+
+    <Spinner
+        android:id="@+id/uploadedSoundSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="184dp"
+        android:layout_marginEnd="184dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/stopDS"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Spinner
         android:id="@+id/cgsSpinner"
-        android:layout_width="0sp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="0dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="19dp"
+        app:layout_constraintBottom_toTopOf="@+id/dsLoop"
         app:layout_constraintEnd_toStartOf="@+id/stSpinner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/come_get_some" />
+        app:layout_constraintTop_toBottomOf="@+id/damn_son" />
 
     <Spinner
         android:id="@+id/stSpinner"
-        android:layout_width="0sp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="2dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="13dp"
+        app:layout_constraintBottom_toBottomOf="@+id/dsSpinner"
         app:layout_constraintEnd_toStartOf="@+id/dsSpinner"
         app:layout_constraintStart_toEndOf="@+id/cgsSpinner"
-        app:layout_constraintTop_toBottomOf="@+id/still_there" />
+        app:layout_constraintTop_toTopOf="@+id/cgsSpinner" />
+
 
     <Spinner
         android:id="@+id/dsSpinner"
-        android:layout_width="0sp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="5dp"
+        android:layout_width="0dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/dsLoop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/stSpinner"
         app:layout_constraintTop_toBottomOf="@+id/damn_son" />
 
     <Spinner
         android:id="@+id/cgsLoop"
-        android:layout_width="0sp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="0dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="22dp"
+        app:layout_constraintBottom_toTopOf="@+id/stopCGS"
         app:layout_constraintEnd_toStartOf="@+id/stLoop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cgsSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/stSpinner" />
 
     <Spinner
         android:id="@+id/stLoop"
-        android:layout_width="0sp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
+        android:layout_width="0dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="22dp"
+        app:layout_constraintBottom_toTopOf="@+id/stopST"
         app:layout_constraintEnd_toStartOf="@+id/dsLoop"
         app:layout_constraintStart_toEndOf="@+id/cgsLoop"
-        app:layout_constraintTop_toBottomOf="@+id/stSpinner"
-        app:layout_constraintTop_toTopOf="@+id/cgsLoop" />
-
+        app:layout_constraintTop_toBottomOf="@+id/cgsSpinner" />
 
     <Spinner
         android:id="@+id/dsLoop"
-        android:layout_width="0sp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="129dp"
+        app:layout_constraintBottom_toBottomOf="@+id/uploadedSoundsText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/stLoop"
-        app:layout_constraintTop_toBottomOf="@+id/dsSpinner"
-        app:layout_constraintTop_toTopOf="@+id/cgsLoop" />
+        app:layout_constraintTop_toTopOf="@+id/title" />
 
     <Button
         android:id="@+id/still_there"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="34dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
         android:onClick="playSound"
         android:text="@string/still_there"
         android:textSize="10sp"
-        app:layout_constraintEnd_toStartOf="@+id/damn_son"
-        app:layout_constraintStart_toEndOf="@+id/come_get_some"
-        app:layout_constraintTop_toTopOf="@+id/come_get_some" />
+        app:layout_constraintStart_toStartOf="@+id/stSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <Button
         android:id="@+id/damn_son"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="41dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
         android:onClick="playSound"
         android:text="@string/damn_son"
         android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/still_there"
-        app:layout_constraintTop_toTopOf="@+id/still_there" />
+        app:layout_constraintStart_toEndOf="@+id/title"
+        app:layout_constraintTop_toTopOf="@+id/title" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="13dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="21dp"
         android:gravity="center"
         android:text="@string/app_name"
-        app:layout_constraintEnd_toStartOf="@+id/damn_son"
+        app:layout_constraintStart_toStartOf="@+id/still_there"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/copyright"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="19dp"
         android:gravity="center"
         android:text="@string/copyright"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -116,24 +159,21 @@
 
     <Button
         android:id="@+id/come_get_some"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="82dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="14dp"
         android:onClick="playSound"
         android:text="@string/come_get_some"
         android:textSize="10sp"
-        app:layout_constraintEnd_toStartOf="@+id/still_there"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/cgsSpinner"
+        app:layout_constraintStart_toStartOf="@+id/cgsSpinner" />
 
     <Button
         android:id="@+id/stop_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginBottom="42dp"
+        android:layout_marginBottom="15dp"
         android:gravity="center"
         android:onClick="stopAll"
         android:text="@string/stop_all"
@@ -145,12 +185,71 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginBottom="41dp"
+        android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:text="@string/menu"
         android:onClick="menu"
+        android:text="@string/menu"
         app:layout_constraintBottom_toTopOf="@+id/copyright"
         app:layout_constraintStart_toStartOf="@+id/copyright" />
+
+    <TextView
+        android:id="@+id/uploadedSoundsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="@string/uploaded_sounds"
+        app:layout_constraintBottom_toTopOf="@+id/stopUploaded"
+        app:layout_constraintStart_toStartOf="@+id/uploadedSound" />
+
+    <Button
+        android:id="@+id/uploadedSound"
+        android:layout_width="173dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="49dp"
+        android:onClick="playSound"
+        android:text="Uploaded Sound"
+        app:layout_constraintBottom_toTopOf="@+id/uploadedSoundLoop"
+        app:layout_constraintEnd_toStartOf="@+id/stopUploaded"
+        app:layout_constraintTop_toTopOf="@+id/uploadedSoundsText" />
+
+    <Button
+        android:id="@+id/stopCGS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginBottom="22dp"
+        android:onClick="stopSound"
+        android:text="@string/stop"
+        app:layout_constraintBottom_toTopOf="@+id/uploadedSoundsText"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/stopST"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginBottom="22dp"
+        android:onClick="stopSound"
+        android:text="@string/stop"
+        app:layout_constraintBottom_toTopOf="@+id/uploadedSoundsText"
+        app:layout_constraintStart_toStartOf="@+id/stLoop" />
+
+    <Button
+        android:id="@+id/stopDS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="165dp"
+        android:layout_marginBottom="166dp"
+        android:onClick="stopSound"
+        android:text="@string/stop"
+        app:layout_constraintBottom_toBottomOf="@+id/uploadedSoundSpinner"
+        app:layout_constraintEnd_toEndOf="@+id/uploadedSoundsText"
+        app:layout_constraintStart_toEndOf="@+id/uploadedSoundsText"
+        app:layout_constraintTop_toTopOf="@+id/damn_son" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

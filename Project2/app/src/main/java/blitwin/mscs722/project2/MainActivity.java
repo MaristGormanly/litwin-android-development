@@ -45,15 +45,6 @@ public class MainActivity extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
-        /*uploadBtn = findViewById(R.id.upload);
-
-        uploadBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });*/
-
     }
 
     public void start(View view) {
@@ -74,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
-            StorageReference ref = storageReference.child("audio/" + UUID.randomUUID().toString());
+            StorageReference ref = storageReference.child("audio/uploaded_file.mp3");
+            //StorageReference ref = storageReference.child("audio/" + UUID.randomUUID().toString());
             ref.putFile(filePath).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
