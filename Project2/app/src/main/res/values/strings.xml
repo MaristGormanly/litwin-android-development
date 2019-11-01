@@ -13,6 +13,8 @@
     <string name="record_a_sound">Record a Sound</string>
     <string name="welcome">Welcome to B-Lit\'s Beat Blender! You can start now, \n or upload or record your own sound first.</string>
     <string name="menu">Menu</string>
+    <string name="choose_file">Choose File</string>
+    <string name="your_file">Your File</string>
     <string-array name="playback_choices">
         <item>0.5X Speed</item>
         <item>1X Speed</item>

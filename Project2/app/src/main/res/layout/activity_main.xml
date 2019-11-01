@@ -34,10 +34,22 @@
         android:id="@+id/start_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="41dp"
-        android:text="@string/start_game"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
         android:onClick="start"
+        android:text="@string/start_game"
+        app:layout_constraintBottom_toTopOf="@+id/chooseFile"
+        app:layout_constraintStart_toStartOf="@+id/chooseFile" />
+
+    <Button
+        android:id="@+id/chooseFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="26dp"
+        android:gravity="center"
+        android:onClick="chooseFile"
+        android:text="@string/choose_file"
         app:layout_constraintBottom_toTopOf="@+id/upload"
         app:layout_constraintStart_toStartOf="@+id/upload" />
 
@@ -45,18 +57,21 @@
         android:id="@+id/upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="268dp"
+        android:gravity="center"
+        android:onClick="uploadFile"
         android:text="@string/upload_sound_file"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/record"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="54dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:gravity="center"
         android:text="@string/record_a_sound"
         app:layout_constraintStart_toStartOf="@+id/upload"
         app:layout_constraintTop_toBottomOf="@+id/upload" />
@@ -70,6 +85,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/filePathText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="2dp"
+        android:text="@string/your_file"
+        app:layout_constraintBottom_toTopOf="@+id/upload"
+        app:layout_constraintStart_toStartOf="@+id/chooseFile" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
