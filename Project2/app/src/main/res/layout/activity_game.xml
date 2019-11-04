@@ -210,8 +210,8 @@
         android:layout_marginTop="46dp"
         android:layout_marginEnd="26dp"
         android:layout_marginBottom="49dp"
-        android:onClick="playSound"
         android:gravity="center"
+        android:onClick="playSound"
         android:text="Uploaded Sound"
         app:layout_constraintBottom_toTopOf="@+id/uploadedSoundLoop"
         app:layout_constraintEnd_toStartOf="@+id/stopUploaded"
@@ -251,6 +251,16 @@
         app:layout_constraintEnd_toEndOf="@+id/uploadedSoundsText"
         app:layout_constraintStart_toEndOf="@+id/uploadedSoundsText"
         app:layout_constraintTop_toTopOf="@+id/damn_son" />
+
+    <CheckBox
+        android:id="@+id/proximitycheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
+        android:text="@string/proximity_sensor"
+        app:layout_constraintBottom_toTopOf="@+id/stop_all"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

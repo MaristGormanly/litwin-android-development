@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
@@ -11,9 +13,11 @@ import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -21,7 +25,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.IOException;
 
 
-public class GameActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class GameActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, SensorEventListener {
     private SoundPool soundPool;
     private int cgs, st, ds;
     private SensorManager sensorManager;
@@ -31,6 +35,7 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
     float dsSoundRate = 1;
     float stSoundRate = 1;
     float uploadedSoundRate = 1;
+    float[] sampleRates = {cgsSoundRate, dsSoundRate, stSoundRate, uploadedSoundRate};
     int cgsLoop = 0;
     int dsLoop = 0;
     int stLoop = 0;
@@ -143,16 +148,16 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
         // Play different sound depending on which button is pressed
         switch (view.getId()) {
             case R.id.come_get_some:
-                cgsStreamId = soundPool.play(cgs, 1, 1, 0, cgsLoop, cgsSoundRate);
+                cgsStreamId = soundPool.play(cgs, 1, 1, 0, cgsLoop, sampleRates[0]);
                 break;
             case R.id.damn_son:
-                dsStreamId = soundPool.play(ds, 1, 1, 0, dsLoop, dsSoundRate);
+                dsStreamId = soundPool.play(ds, 1, 1, 0, dsLoop, sampleRates[1]);
                 break;
             case R.id.still_there:
-                stStreamId = soundPool.play(st, 1, 1, 0, stLoop, stSoundRate);
+                stStreamId = soundPool.play(st, 1, 1, 0, stLoop, sampleRates[2]);
                 break;
             case R.id.uploadedSound:
-                uploadedSoundPlayer.setPlaybackParams(uploadedSoundPlayer.getPlaybackParams().setSpeed(uploadedSoundRate));
+                uploadedSoundPlayer.setPlaybackParams(uploadedSoundPlayer.getPlaybackParams().setSpeed(sampleRates[3]));
                 uploadedSoundPlayer.start();
         }
     }
@@ -192,6 +197,8 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // check if use proximity sensor is checked
+        final CheckBox proximityCheckBox = findViewById(R.id.proximitycheckBox);
         boolean playbackSelected = false;
         boolean loopSelected = false;
         for (int i : playbackSpinners) {
@@ -233,16 +240,25 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
         // change parameter of selected sound
         switch (parent.getId()) {
             case R.id.cgsSpinner:
-                cgsSoundRate = soundRate;
+                // only change these if proximity sensor is not being used
+                if (!proximityCheckBox.isChecked()) {
+                    sampleRates[0] = soundRate;
+                }
                 break;
             case R.id.stSpinner:
-                stSoundRate =  soundRate;
+                if (!proximityCheckBox.isChecked()) {
+                    sampleRates[1] = soundRate;
+                }
                 break;
             case R.id.dsSpinner:
-                dsSoundRate = soundRate;
+                if (!proximityCheckBox.isChecked()) {
+                    sampleRates[2] = soundRate;
+                }
                 break;
             case R.id.uploadedSoundSpinner:
-                uploadedSoundRate = soundRate;
+                if (!proximityCheckBox.isChecked()) {
+                    sampleRates[3] = soundRate;
+                }
                 break;
             case R.id.cgsLoop:
                 cgsLoop = loop;
@@ -266,5 +282,47 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        float distance = event.values[0];
+        float newSampleRate = 0;
+        final CheckBox proximityCheckBox = findViewById(R.id.proximitycheckBox);
+        // only use sensor if checkbox is active
+        if (proximityCheckBox.isChecked()) {
+            // change sample rates depending on distance value
+            if (distance < 2) {
+                newSampleRate = (float) 0.5;
+            } else if (distance < 5) {
+                newSampleRate = 1;
+            } else {
+                newSampleRate = 2;
+            }
+            // update all sample rates
+            for (int i = 0; i < sampleRates.length; i++) {
+                sampleRates[i] = newSampleRate;
+            }
+        }
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    @Override
+    protected void onResume() {
+        // Register a listener for the sensor.
+        super.onResume();
+        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        // Be sure to unregister the sensor when the activity pauses.
+        super.onPause();
+        sensorManager.unregisterListener(this);
     }
 }
