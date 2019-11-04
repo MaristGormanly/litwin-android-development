@@ -35,7 +35,7 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
     float dsSoundRate = 1;
     float stSoundRate = 1;
     float uploadedSoundRate = 1;
-    float[] sampleRates = {cgsSoundRate, dsSoundRate, stSoundRate, uploadedSoundRate};
+    float[] sampleRates = {cgsSoundRate, stSoundRate, dsSoundRate, uploadedSoundRate};
     int cgsLoop = 0;
     int dsLoop = 0;
     int stLoop = 0;
@@ -43,7 +43,7 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
     int dsStreamId;
     int stStreamId;
     int[] playbackSpinners = {R.id.cgsSpinner, R.id.dsSpinner, R.id.stSpinner, R.id.uploadedSoundSpinner};
-    int[] loopSpinners = {R.id.cgsLoop, R.id.dsLoop, R.id.stLoop, R.id.uploadedSoundLoop};
+    //int[] loopSpinners = {R.id.cgsLoop, R.id.dsLoop, R.id.stLoop, R.id.uploadedSoundLoop};
     MediaPlayer uploadedSoundPlayer = new MediaPlayer();
     FirebaseStorage storage;
     StorageReference storageReference;
@@ -118,46 +118,51 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
         uploadedSpinner.setOnItemSelectedListener(this);
 
         // Build the loop option spinners
-        Spinner loopSpinner = findViewById(R.id.cgsLoop);
-        ArrayAdapter<CharSequence> loopAdapter = ArrayAdapter.createFromResource(this,
-                R.array.loop_choices, android.R.layout.simple_spinner_item);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        loopSpinner.setAdapter(loopAdapter);
-        loopSpinner.setSelection(1);
-        loopSpinner.setOnItemSelectedListener(this);
-
-        Spinner loopSpinner2 = findViewById(R.id.stLoop);
-        loopSpinner2.setAdapter(loopAdapter);
-        loopSpinner2.setSelection(1);
-        loopSpinner2.setOnItemSelectedListener(this);
-
-        Spinner loopSpinner3 = findViewById(R.id.dsLoop);
-        loopSpinner3.setAdapter(loopAdapter);
-        loopSpinner3.setSelection(1);
-        loopSpinner3.setOnItemSelectedListener(this);
-
-        Spinner uploadedLoop = findViewById(R.id.uploadedSoundLoop);
-        uploadedLoop.setAdapter(loopAdapter);
-        uploadedLoop.setSelection(1);
-        uploadedLoop.setOnItemSelectedListener(this);
+//        Spinner loopSpinner = findViewById(R.id.cgsLoop);
+//        ArrayAdapter<CharSequence> loopAdapter = ArrayAdapter.createFromResource(this,
+//                R.array.loop_choices, android.R.layout.simple_spinner_item);
+//
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        loopSpinner.setAdapter(loopAdapter);
+//        loopSpinner.setSelection(1);
+//        loopSpinner.setOnItemSelectedListener(this);
+//
+//        Spinner loopSpinner2 = findViewById(R.id.stLoop);
+//        loopSpinner2.setAdapter(loopAdapter);
+//        loopSpinner2.setSelection(1);
+//        loopSpinner2.setOnItemSelectedListener(this);
+//
+//        Spinner loopSpinner3 = findViewById(R.id.dsLoop);
+//        loopSpinner3.setAdapter(loopAdapter);
+//        loopSpinner3.setSelection(1);
+//        loopSpinner3.setOnItemSelectedListener(this);
+//
+//        Spinner uploadedLoop = findViewById(R.id.uploadedSoundLoop);
+//        uploadedLoop.setAdapter(loopAdapter);
+//        uploadedLoop.setSelection(1);
+//        uploadedLoop.setOnItemSelectedListener(this);
 
     }
 
     public void playSound(View view) {
         // Play different sound depending on which button is pressed
+        final CheckBox cgsloopCheckBox = findViewById(R.id.cgsloopcheckBox);
+        final CheckBox stloopCheckBox = findViewById(R.id.stloopcheckBox);
+        final CheckBox dsloopCheckBox = findViewById(R.id.dsloopcheckBox);
+        final CheckBox uploadedloopCheckBox = findViewById(R.id.uploadedloopcheckBox);
         switch (view.getId()) {
             case R.id.come_get_some:
-                cgsStreamId = soundPool.play(cgs, 1, 1, 0, cgsLoop, sampleRates[0]);
-                break;
-            case R.id.damn_son:
-                dsStreamId = soundPool.play(ds, 1, 1, 0, dsLoop, sampleRates[1]);
+                cgsStreamId = soundPool.play(cgs, 1, 1, 0, cgsloopCheckBox.isChecked() ? -1 : 0, sampleRates[0]);
                 break;
             case R.id.still_there:
-                stStreamId = soundPool.play(st, 1, 1, 0, stLoop, sampleRates[2]);
+                stStreamId = soundPool.play(st, 1, 1, 0, stloopCheckBox.isChecked() ? -1 : 0, sampleRates[1]);
+                break;
+            case R.id.damn_son:
+                dsStreamId = soundPool.play(ds, 1, 1, 0, dsloopCheckBox.isChecked() ? -1 : 0, sampleRates[2]);
                 break;
             case R.id.uploadedSound:
                 uploadedSoundPlayer.setPlaybackParams(uploadedSoundPlayer.getPlaybackParams().setSpeed(sampleRates[3]));
+                uploadedSoundPlayer.setLooping(uploadedloopCheckBox.isChecked());
                 uploadedSoundPlayer.start();
         }
     }
@@ -200,19 +205,19 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
         // check if use proximity sensor is checked
         final CheckBox proximityCheckBox = findViewById(R.id.proximitycheckBox);
         boolean playbackSelected = false;
-        boolean loopSelected = false;
+        //boolean loopSelected = false;
         for (int i : playbackSpinners) {
             if (i == parent.getId()) {
                 playbackSelected = true;
                 break;
             }
         }
-        for (int i : loopSpinners) {
-            if (i == parent.getId()) {
-                loopSelected = true;
-                break;
-            }
-        }
+//        for (int i : loopSpinners) {
+//            if (i == parent.getId()) {
+//                loopSelected = true;
+//                break;
+//            }
+//        }
         float soundRate = 1;
         int loop = 0;
         // depending on which spinner group was selected
@@ -227,7 +232,7 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
                 case 2:
                     soundRate = 2;
             }
-        } else if (loopSelected) {
+        } /*else if (loopSelected) {
             switch (position) {
                 case 0:
                     loop = -1;
@@ -235,7 +240,7 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
                 case 1:
                     loop = 0;
             }
-        }
+        }*/
 
         // change parameter of selected sound
         switch (parent.getId()) {
@@ -260,7 +265,7 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
                     sampleRates[3] = soundRate;
                 }
                 break;
-            case R.id.cgsLoop:
+            /*case R.id.cgsLoop:
                 cgsLoop = loop;
                 break;
             case R.id.stLoop:
@@ -270,7 +275,7 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
                 dsLoop = loop;
                 break;
             case R.id.uploadedSoundLoop:
-                uploadedSoundPlayer.setLooping(loop == -1);
+                uploadedSoundPlayer.setLooping(loop == -1);*/
         }
     }
 

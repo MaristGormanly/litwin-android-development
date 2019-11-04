@@ -18,6 +18,7 @@
     <string name="uploaded_sounds">Uploaded Sound \n (Only most recent upload can be used)</string>
     <string name="stop">Stop</string>
     <string name="proximity_sensor">Use Proximity Sensor</string>
+    <string name="loop">Loop</string>
     <string-array name="playback_choices">
         <item>0.5X Speed</item>
         <item>1X Speed</item>

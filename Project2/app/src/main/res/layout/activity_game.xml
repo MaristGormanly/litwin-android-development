@@ -11,44 +11,41 @@
         android:id="@+id/stopUploaded"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="49dp"
+        android:layout_marginStart="26dp"
         android:onClick="stopSound"
         android:text="@string/stop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stopDS" />
+        app:layout_constraintStart_toEndOf="@+id/uploadedSound"
+        app:layout_constraintTop_toTopOf="@+id/uploadedSound" />
 
-    <Spinner
+    <!--Spinner
         android:id="@+id/uploadedSoundLoop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="9dp"
         app:layout_constraintStart_toStartOf="@+id/uploadedSoundSpinner"
-        app:layout_constraintTop_toBottomOf="@+id/uploadedSoundSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/uploadedSoundSpinner" /-->
 
     <Spinner
         android:id="@+id/uploadedSoundSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="184dp"
-        android:layout_marginEnd="184dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/stopDS"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/uploadedloopcheckBox"
+        app:layout_constraintStart_toStartOf="@+id/uploadedloopcheckBox" />
 
     <Spinner
         android:id="@+id/cgsSpinner"
         android:layout_width="0dp"
         android:layout_height="27dp"
         android:layout_marginStart="31dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="23dp"
-        android:layout_marginBottom="19dp"
-        app:layout_constraintBottom_toTopOf="@+id/dsLoop"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/cgsloopcheckBox"
         app:layout_constraintEnd_toStartOf="@+id/stSpinner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/damn_son" />
+        app:layout_constraintTop_toBottomOf="@+id/still_there" />
 
     <Spinner
         android:id="@+id/stSpinner"
@@ -66,15 +63,15 @@
         android:id="@+id/dsSpinner"
         android:layout_width="0dp"
         android:layout_height="31dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="17dp"
-        android:layout_marginBottom="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/dsLoop"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/stopDS"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/stSpinner"
-        app:layout_constraintTop_toBottomOf="@+id/damn_son" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
+    <!--Spinner
         android:id="@+id/cgsLoop"
         android:layout_width="0dp"
         android:layout_height="27dp"
@@ -109,7 +106,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/uploadedSoundsText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/stLoop"
-        app:layout_constraintTop_toTopOf="@+id/title" />
+        app:layout_constraintTop_toTopOf="@+id/title" /-->
 
     <Button
         android:id="@+id/still_there"
@@ -207,60 +204,102 @@
         android:id="@+id/uploadedSound"
         android:layout_width="173dp"
         android:layout_height="58dp"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginBottom="49dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginBottom="66dp"
         android:gravity="center"
         android:onClick="playSound"
         android:text="Uploaded Sound"
-        app:layout_constraintBottom_toTopOf="@+id/uploadedSoundLoop"
-        app:layout_constraintEnd_toStartOf="@+id/stopUploaded"
-        app:layout_constraintTop_toTopOf="@+id/uploadedSoundsText" />
+        app:layout_constraintBottom_toBottomOf="@+id/uploadedloopcheckBox"
+        app:layout_constraintEnd_toStartOf="@+id/uploadedSoundSpinner"
+        app:layout_constraintStart_toStartOf="@+id/uploadedSoundSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/stopST" />
 
     <Button
         android:id="@+id/stopCGS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginBottom="22dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="9dp"
         android:onClick="stopSound"
         android:text="@string/stop"
-        app:layout_constraintBottom_toTopOf="@+id/uploadedSoundsText"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/stopST"
+        app:layout_constraintTop_toBottomOf="@+id/dsloopcheckBox" />
 
     <Button
         android:id="@+id/stopST"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginBottom="22dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="146dp"
+        android:layout_marginBottom="147dp"
         android:onClick="stopSound"
         android:text="@string/stop"
-        app:layout_constraintBottom_toTopOf="@+id/uploadedSoundsText"
-        app:layout_constraintStart_toStartOf="@+id/stLoop" />
+        app:layout_constraintBottom_toBottomOf="@+id/uploadedSoundSpinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/damn_son" />
 
     <Button
         android:id="@+id/stopDS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="165dp"
-        android:layout_marginBottom="166dp"
+        android:layout_marginBottom="22dp"
         android:onClick="stopSound"
         android:text="@string/stop"
-        app:layout_constraintBottom_toBottomOf="@+id/uploadedSoundSpinner"
+        app:layout_constraintBottom_toTopOf="@+id/uploadedSoundsText"
         app:layout_constraintEnd_toEndOf="@+id/uploadedSoundsText"
-        app:layout_constraintStart_toEndOf="@+id/uploadedSoundsText"
-        app:layout_constraintTop_toTopOf="@+id/damn_son" />
+        app:layout_constraintStart_toEndOf="@+id/uploadedSoundsText" />
 
     <CheckBox
         android:id="@+id/proximitycheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="13dp"
+        android:layout_marginBottom="12dp"
         android:text="@string/proximity_sensor"
         app:layout_constraintBottom_toTopOf="@+id/stop_all"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/cgsloopcheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="9dp"
+        android:text="@string/loop"
+        app:layout_constraintBottom_toTopOf="@+id/stopST"
+        app:layout_constraintEnd_toEndOf="@+id/stopST" />
+
+    <CheckBox
+        android:id="@+id/dsloopcheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="9dp"
+        android:text="@string/loop"
+        app:layout_constraintBottom_toTopOf="@+id/stopDS"
+        app:layout_constraintEnd_toEndOf="@+id/stopDS" />
+
+    <CheckBox
+        android:id="@+id/stloopcheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="11dp"
+        android:text="@string/loop"
+        app:layout_constraintStart_toStartOf="@+id/stopCGS"
+        app:layout_constraintTop_toBottomOf="@+id/stSpinner" />
+
+    <CheckBox
+        android:id="@+id/uploadedloopcheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="99dp"
+        android:text="@string/loop"
+        app:layout_constraintBottom_toTopOf="@+id/proximitycheckBox"
+        app:layout_constraintEnd_toEndOf="@+id/stop_all"
+        app:layout_constraintStart_toStartOf="@+id/copyright" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
