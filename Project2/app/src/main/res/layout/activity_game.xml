@@ -211,6 +211,7 @@
         android:layout_marginEnd="26dp"
         android:layout_marginBottom="49dp"
         android:onClick="playSound"
+        android:gravity="center"
         android:text="Uploaded Sound"
         app:layout_constraintBottom_toTopOf="@+id/uploadedSoundLoop"
         app:layout_constraintEnd_toStartOf="@+id/stopUploaded"

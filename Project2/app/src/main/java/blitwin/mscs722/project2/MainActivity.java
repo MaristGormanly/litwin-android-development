@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
             StorageReference ref = storageReference.child("audio/uploaded_file.mp3");
-            //StorageReference ref = storageReference.child("audio/" + UUID.randomUUID().toString());
             ref.putFile(filePath).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SELECT_AUDIO && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
-            filePathText.setText(filePath.toString());
+            filePathText.setText("File Selected");
 
         }
     }
