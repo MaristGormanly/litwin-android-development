@@ -1,16 +1,16 @@
 package blitwin.mscs722.project2;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,7 +24,9 @@ import java.io.IOException;
 public class GameActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private SoundPool soundPool;
     private int cgs, st, ds;
-    int maxStreams = 5;
+    private SensorManager sensorManager;
+    private Sensor sensor;
+    int maxStreams = 10;
     float cgsSoundRate = 1;
     float dsSoundRate = 1;
     float stSoundRate = 1;
@@ -63,10 +65,15 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
             soundPool = new SoundPool(maxStreams, AudioManager.STREAM_MUSIC, 0);
         }
 
+        // load the proximity sensor
+        sensorManager = (SensorManager) getSystemService(this.SENSOR_SERVICE);
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         uploadedFileRef = storageReference.child("audio/uploaded_file.mp3");
 
+        // load the sound assets
         cgs = soundPool.load(this, R.raw.comegetsome, 1);
         st = soundPool.load(this, R.raw.stillthere, 1);
         ds = soundPool.load(this, R.raw.damnson, 1);
@@ -159,7 +166,6 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void stopSound(View view) {
-        Log.d("here", "in here");
         switch (view.getId()) {
             case R.id.stopCGS:
                 soundPool.pause(cgsStreamId);
