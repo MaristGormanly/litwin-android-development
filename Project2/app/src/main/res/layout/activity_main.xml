@@ -90,11 +90,19 @@
         android:id="@+id/filePathText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="2dp"
         android:text="@string/your_file"
         app:layout_constraintBottom_toTopOf="@+id/upload"
         app:layout_constraintStart_toStartOf="@+id/chooseFile" />
+
+    <TextView
+        android:id="@+id/recordInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:gravity="center"
+        android:text="Tap and Hold to Record"
+        app:layout_constraintEnd_toEndOf="@+id/upload"
+        app:layout_constraintTop_toBottomOf="@+id/record" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,9 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +25,9 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.IOException;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
 
     private final int SELECT_AUDIO = 71;
 
-    FirebaseStorage storage;
-    StorageReference storageReference;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+    private MediaRecorder recorder;
+    private String recordedFileName = null;
 
 
     @Override
@@ -40,8 +51,25 @@ public class MainActivity extends AppCompatActivity {
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
+        Button recordButton = findViewById(R.id.record);
+        recordedFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recorded_sound.3gp";
+
+        recordButton.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    startRecording();
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    stopRecording();
+                }
+
+                return false;
+            }
+        });
 
     }
+
 
     public void start(View view) {
         Intent gameIntent = new Intent(this, GameActivity.class);
@@ -85,6 +113,65 @@ public class MainActivity extends AppCompatActivity {
             });
 
         }
+    }
+
+    private void startRecording() {
+        recorder = new MediaRecorder();
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        recorder.setOutputFile(recordedFileName);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+
+
+        try {
+            recorder.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        recorder.start();
+    }
+
+    private void stopRecording() {
+        recorder.stop();
+        recorder.release();
+        recorder = null;
+
+        uploadRecordedFile();
+    }
+
+    private void uploadRecordedFile() {
+        StorageReference ref = storageReference.child("audio/recorded_file.3gp");
+        Uri recordedFilePath = Uri.fromFile(new File(recordedFileName));
+        Log.d("recordedName", recordedFileName);
+        Log.d("recordedPath", recordedFilePath.toString());
+        if (recordedFilePath != null) {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+            // The different events during the upload
+            ref.putFile(recordedFilePath).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    progressDialog.dismiss();
+                    Toast.makeText(MainActivity.this, "Recording Uploaded", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(MainActivity.this, "Recording Upload Failed "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                    progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                }
+            });
+
+        }
+
     }
 
     @Override
