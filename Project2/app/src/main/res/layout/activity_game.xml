@@ -9,8 +9,8 @@
 
     <Button
         android:id="@+id/stopUploaded"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="37dp"
         android:layout_marginStart="26dp"
         android:onClick="stopSound"
         android:text="@string/stop"
@@ -200,13 +200,13 @@
 
     <Button
         android:id="@+id/uploadedSound"
-        android:layout_width="173dp"
-        android:layout_height="58dp"
+        android:layout_width="139dp"
+        android:layout_height="37dp"
         android:layout_marginTop="68dp"
         android:layout_marginBottom="66dp"
         android:gravity="center"
         android:onClick="playSound"
-        android:text="Uploaded Sound"
+        android:text="@string/uploaded"
         app:layout_constraintBottom_toBottomOf="@+id/uploadedloopcheckBox"
         app:layout_constraintEnd_toStartOf="@+id/uploadedSoundSpinner"
         app:layout_constraintStart_toStartOf="@+id/uploadedSoundSpinner"
