@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.ar.sceneform.plugin'
 
 android {
     compileSdkVersion 29
@@ -47,3 +48,8 @@ dependencies {
     // Alternatively, use ArSceneView without the UX dependency.
     implementation 'com.google.ar.sceneform:core:1.13.0'
 }
+
+sceneform.asset('sampledata/Mesh_Beagle.obj',
+        'default',
+        'sampledata/Mesh_Beagle.sfa',
+        'src/main/assets/Mesh_Beagle')
