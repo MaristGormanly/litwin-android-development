@@ -53,3 +53,8 @@ sceneform.asset('sampledata/Mesh_Beagle.obj',
         'default',
         'sampledata/Mesh_Beagle.sfa',
         'src/main/assets/Mesh_Beagle')
+
+sceneform.asset('sampledata/stick.obj',
+        'default',
+        'sampledata/stick.sfa',
+        'src/main/assets/stick')

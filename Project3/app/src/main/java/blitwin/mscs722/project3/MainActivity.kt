@@ -32,6 +32,10 @@ class MainActivity : AppCompatActivity() {
         fab_beagle.setOnClickListener {
             addObject(Uri.parse("Mesh_Beagle.sfb"))
         }
+
+        fab_stick.setOnClickListener {
+            addObject(Uri.parse("stick.sfb"))
+        }
     }
 
     private fun addObject(parse: Uri) {
