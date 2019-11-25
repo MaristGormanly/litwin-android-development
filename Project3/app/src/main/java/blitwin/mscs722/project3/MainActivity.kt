@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         fragment = supportFragmentManager.findFragmentById(R.id.ux_fragment) as ArFragment
 
-        fab.setOnClickListener {
+        fab_beagle.setOnClickListener {
             addObject(Uri.parse("Mesh_Beagle.sfb"))
         }
     }
@@ -69,6 +69,8 @@ class MainActivity : AppCompatActivity() {
     private fun addNodeToScene(fragment: ArFragment, createAnchor: Anchor, renderable: ModelRenderable) {
         val anchorNode = AnchorNode(createAnchor)
         val transformableNode = TransformableNode(fragment.transformationSystem)
+        transformableNode.scaleController.maxScale = 0.2f
+        transformableNode.scaleController.minScale = 0.01f
         transformableNode.renderable = renderable
         transformableNode.setParent(anchorNode)
         fragment.arSceneView.scene.addChild(anchorNode)
