@@ -15,8 +15,10 @@ import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.TransformableNode
+import com.google.ar.sceneform.ux.TranslationController
 
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -80,6 +82,9 @@ class MainActivity : AppCompatActivity() {
         transformableNode.scaleController.maxScale = 0.2f
         transformableNode.scaleController.minScale = 0.01f
         transformableNode.renderable = renderable
+        // Allow obj to move
+        val controller = transformableNode.translationController
+        controller.allowedPlaneTypes = EnumSet.of(Plane.Type.HORIZONTAL_UPWARD_FACING, Plane.Type.HORIZONTAL_DOWNWARD_FACING, Plane.Type.VERTICAL)
         transformableNode.setParent(anchorNode)
         fragment.arSceneView.scene.addChild(anchorNode)
         transformableNode.select()
