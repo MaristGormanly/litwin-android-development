@@ -36,6 +36,10 @@ class MainActivity : AppCompatActivity() {
         fab_stick.setOnClickListener {
             addObject(Uri.parse("stick.sfb"))
         }
+
+        fab_tennis.setOnClickListener {
+            addObject(Uri.parse("Tennis_Ball.sfb"))
+        }
     }
 
     private fun addObject(parse: Uri) {

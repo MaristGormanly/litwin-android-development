@@ -45,6 +45,18 @@
         app:fabSize="normal"
         app:srcCompat="@drawable/stick" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_tennis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginBottom="85dp"
+        app:layout_anchorGravity="top|end"
+        app:layout_anchor="@+id/fab_stick"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/tennis" />
+
     <fragment android:name="com.google.ar.sceneform.ux.ArFragment"
         android:id="@+id/ux_fragment"
         android:layout_width="match_parent"

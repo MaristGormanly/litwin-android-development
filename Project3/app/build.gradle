@@ -58,3 +58,8 @@ sceneform.asset('sampledata/stick.obj',
         'default',
         'sampledata/stick.sfa',
         'src/main/assets/stick')
+
+sceneform.asset('sampledata/Tennis_Ball.obj',
+        'default',
+        'sampledata/Tennis_Ball.sfa',
+        'src/main/assets/Tennis_Ball')
